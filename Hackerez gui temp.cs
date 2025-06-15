@@ -87,8 +87,12 @@ public class MyCoolModTemplate : BaseUnityPlugin
         if (GUILayout.Button("Black")) backgroundColor = Color.black;
         if (GUILayout.Button("Red")) backgroundColor = Color.red;
         if (GUILayout.Button("Blue")) backgroundColor = Color.blue;
-        if (GUILayout.Button("Rainbow (TODO)")) { }
+            if (GUILayout.Button("Rainbow"))
+    {
+        float skibidi = Mathf.Repeat(Time.realtimeSinceStartup * 0.2f, 1f);
+        backgroundColor = Color.HSVToRGB(skibidi, 1f, 1f);
     }
+}
 
     // Photon tab: connect, disconnect, quit
     private void PhotonTab()
