@@ -6,8 +6,8 @@ using GorillaNetworking;
 // This is a Gorilla Tag mod template for building a custom GUI using BepInEx.
 // It includes tab support and common modding utilities like room control and movement tweaks.
 
-[BepInPlugin("com.yourname.guitemplate", "My GUI Template", "1.0.0")]
-public class MyCoolModTemplate : BaseUnityPlugin
+[BepInPlugin("com.guitemp.gui", "gui", "1.0.0")]
+public class guiii : BaseUnityPlugin
 {
     private string roomCode = "";
     
@@ -20,7 +20,7 @@ public class MyCoolModTemplate : BaseUnityPlugin
     public void OnGUI()
     {
         GUI.backgroundColor = backgroundColor;
-        Window = GUI.Window(1337, Window, DoWindow, "My Mod Menu");
+        Window = GUI.Window(1337, Window, DoWindow, "template");
         GUI.DragWindow();
     }
 
