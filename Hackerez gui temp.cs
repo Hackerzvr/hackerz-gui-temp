@@ -9,32 +9,22 @@ using GorillaNetworking;
 [BepInPlugin("com.yourname.guitemplate", "My GUI Template", "1.0.0")]
 public class MyCoolModTemplate : BaseUnityPlugin
 {
-    // Room code used for joining a specific room
     private string roomCode = "";
-
+    
     // Position and size of the GUI window
     private Rect Window = new Rect(100f, 100f, 300f, 400f);
-
-    // Dragging variables
-    private bool dragging = false;
-    private Vector2 dragstart;
-
-    // Tabs for different mod categories
     private enum Tab { Visual, Photon, Movement }
     private Tab currentTab = Tab.Visual;
+    private Color backgroundColor = new Color(0.1f, 0.1f, 0.1f); 
 
-    // Current background color of the GUI
-    private Color backgroundColor = new Color(0.1f, 0.1f, 0.1f); // Dark gray
-
-    // Draw GUI every frame
     public void OnGUI()
     {
         GUI.backgroundColor = backgroundColor;
         Window = GUI.Window(1337, Window, DoWindow, "My Mod Menu");
-        Dragging();
+        GUI.DragWindow();
     }
 
-    // Handles window rendering and tab switching
+  
     private void DoWindow(int id)
     {
         GUILayout.BeginVertical();
@@ -60,25 +50,7 @@ public class MyCoolModTemplate : BaseUnityPlugin
         GUI.DragWindow();
     }
 
-    // Enables dragging the window
-    private void Dragging()
-    {
-        if (Event.current.type == EventType.MouseDown && Window.Contains(Event.current.mousePosition))
-        {
-            dragging = true;
-            dragstart = Event.current.mousePosition - new Vector2(Window.x, Window.y);
-        }
-        else if (Event.current.type == EventType.MouseUp)
-        {
-            dragging = false;
-        }
-
-        if (dragging)
-        {
-            Window.position = Event.current.mousePosition - dragstart;
-        }
-    }
-
+   
     // Visual tab: background color changer
     private void VisualTab()
     {
@@ -122,7 +94,7 @@ public class MyCoolModTemplate : BaseUnityPlugin
         if (GUILayout.Button("Enable Speed Boost"))
         {
             var player = GorillaLocomotion.GTPlayer.Instance;
-            if (player != null)
+            if (player)
             {
                 player.maxJumpSpeed = 9f;
                 player.jumpMultiplier = 8f;
@@ -132,7 +104,7 @@ public class MyCoolModTemplate : BaseUnityPlugin
         if (GUILayout.Button("Reset Speed"))
         {
             var player = GorillaLocomotion.GTPlayer.Instance;
-            if (player != null)
+            if (player)
             {
                 player.maxJumpSpeed = 4.5f;
                 player.jumpMultiplier = 1f;
